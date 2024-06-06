@@ -40,25 +40,25 @@ jobs:
           - x86_64
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@main
         with:
           fetch-depth: 0
 
       - name: Prepare package
         run: |
-          sed -i '/^SRCDIR/ s/$/\/feed/' openwrt/Makefile
-          mkdir -p feed/scutclient
-          mv openwrt/Makefile feed/scutclient/
-          cat feed/scutclient/Makefile
+          sed -i '/^SRCDIR/ s/$/\/feed/' Makefile
+          mkdir -p feed/luci-app-scutclient
+          mv Makefile feed/luci-app-scutclient/
+          cat feed/luci-app-scutclient/Makefile
       - name: Build
         uses: openwrt/gh-action-sdk@main
         env:
           ARCH: ${{ matrix.arch }}
           NO_DEFAULT_FEEDS: 1
-          PACKAGES: scutclient
+          PACKAGES: luci-app-scutclient
 
       - name: Store packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@main
         with:
           name: ${{ matrix.arch }}-packages
           path: bin/packages/${{ matrix.arch }}/action/*.ipk
