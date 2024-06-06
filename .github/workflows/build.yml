@@ -47,9 +47,9 @@ jobs:
       - name: Prepare package
         run: |
           sed -i '/^SRCDIR/ s/$/\/feed/' Makefile
-          mkdir -p feed/luci-app-scutclient
-          mv Makefile feed/luci-app-scutclient/
-          cat feed/luci-app-scutclient/Makefile
+          mkdir -p feed/luci/applications/luci-app-scutclient
+          mv Makefile feed/luci/applications/luci-app-scutclient/
+          cat feed/luci/applications/luci-app-scutclient/Makefile
       - name: Build
         uses: openwrt/gh-action-sdk@main
         env:
